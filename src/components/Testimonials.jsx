@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function Testimonials() {
   const items = [
@@ -26,13 +27,20 @@ export default function Testimonials() {
     <section className="bg-white py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">What Our Clients Said</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900">What Our Clients Said</h2>
           <p className="mt-3 text-slate-600">Real feedback from clients who trusted us with their most important matters.</p>
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {items.map((t) => (
-            <figure key={t.name} className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-transform hover:-translate-y-1">
+          {items.map((t, i) => (
+            <motion.figure
+              key={t.name}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: i * 0.05 }}
+              className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-transform hover:-translate-y-1"
+            >
               <div className="flex items-center gap-4">
                 <img src={t.img} alt={t.name} className="h-12 w-12 rounded-full object-cover" />
                 <div>
@@ -41,7 +49,7 @@ export default function Testimonials() {
                 </div>
               </div>
               <blockquote className="mt-4 text-slate-700 text-sm">“{t.quote}”</blockquote>
-            </figure>
+            </motion.figure>
           ))}
         </div>
       </div>
